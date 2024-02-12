@@ -2,7 +2,9 @@ package com.chromanyan.ludicrousinefficiency;
 
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
@@ -16,7 +18,6 @@ public class LudicrousInefficiency {
     public static final String MODID = "ludicrousinefficiency";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
-    // Create a Deferred Register to hold Blocks which will all be registered under the "ludicrousinefficiency" namespace
 
     public LudicrousInefficiency() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -25,5 +26,10 @@ public class LudicrousInefficiency {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-
+    @SubscribeEvent
+    public void lag(TickEvent.PlayerTickEvent event) {
+        for (int i = 0; i < 500; i++) {
+            LOGGER.info("Inefficiency step: " + i);
+        }
+    }
 }
